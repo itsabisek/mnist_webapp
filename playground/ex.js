@@ -1,7 +1,11 @@
 window.addEventListener('load', () => {
 	const canvas = document.getElementById('draw');
+	// canvas.setAttribute('width', "200");
+	// canvas.setAttribute('height', "200");
 	const ctx = canvas.getContext('2d');
-
+	// var mypic = new Image();
+	// mypic.src = "mypic.jpg";
+	// ctx.drawImage(mypic, 0, 0)
 	// height_offset = window.innerHeight-250;
 	// width_offset = window.innerWidth-500;
 	//canvas.height = window.innerHeight-height_offset;
@@ -22,19 +26,20 @@ window.addEventListener('load', () => {
 	// canvas.style.right = "100px";
 	// canvas.style.bottom = "100px";
 
-	// canvas.style.marginTop = "50%";
+	canvas.style.marginTop = "100px";
 	// canvas.style.marginRight = "50%";
 	// canvas.style.marginLeft = "50%";
 	// canvas.style.marginBottom = "50%";
 
 	// ctx.fillText(window.innerHeight, 500, 500);
 
-	canvas.width = window.innerWidth / 2;
-	canvas.height = (window.innerHeight / 2);
+	// canvas.width = window.innerWidth / 2;
+	// canvas.height = (window.innerHeight / 2);
 
 	let penDown = false;
 
 	function startDrawing() {
+
 		penDown = true;
 	}
 
@@ -44,6 +49,7 @@ window.addEventListener('load', () => {
 	}
 
 	function draw(e) {
+		console.log(canvas.offsetLeft);
 		if (!penDown) return;
 
 		// ctx.fillRect(150, 150, 20, 20);
@@ -52,11 +58,12 @@ window.addEventListener('load', () => {
 
 		// ctx.beginPath();
 		// ctx.moveTo(e.clientX, e.clientY);
-		ctx.lineTo(e.clientX, e.clientY);
+		// ctx.moveTo(0, 0);
+		ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 		ctx.stroke();
 
-		ctx.beginPath();
-		ctx.lineTo(e.clientX, e.clientY);
+		// ctx.beginPath();
+		// ctx.lineTo(e.clientX, e.clientY);
 
 	}
 
