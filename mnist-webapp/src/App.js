@@ -4,7 +4,9 @@ import './App.css';
 import Greet from './components/Greet'
 import Welcome from './components/Welcome'
 import JustForFun from './components/JustForFun'
-import {Canvas} from './components/Canvas'
+import {Canvas} from './components/DrawCanvas'
+import {PlotChart} from './components/PlotChart'
+import './components/style.css'
 
 class App extends React.Component {
 	render() {
@@ -27,6 +29,7 @@ class App extends React.Component {
 			}
 
 			<Canvas/>
+			<PlotChart/>
 		</div>);
 	}
 

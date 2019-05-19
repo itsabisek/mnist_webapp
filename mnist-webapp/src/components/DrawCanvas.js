@@ -37,8 +37,12 @@ export class Canvas extends React.Component {
 			if (!penDown) 
 				return
 
-			ctx.lineWidth = 5
+			ctx.lineWidth = 15
 			ctx.lineCap = 'round'
+			ctx.shadowBlur = 2;
+			ctx.shadowOffsetX = 5;
+			ctx.shadowOffsetY = 3;
+			ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 			ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 			ctx.stroke()
 
@@ -50,20 +54,33 @@ export class Canvas extends React.Component {
 
 	}
 
+	clearCanvas = () => {
+		const ctx = this.refs.canvas.getContext('2d')
+		ctx.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height)
+	}
+
 	render() {
 
-		var canvasStyle = {
-			"border": "2px solid black",
-			"marginTop": "10%",
-			"marginLeft": "20%",
-			"marginRight": "80%",
-			"marginBottom": "90%"
-		}
+		// var canvasStyle = {
+		// 	"border": "2px solid black",
+		// 	"position": "relative",
+		// 	"marginTop": "10%",
+		// 	"marginLeft": "10%",
+		// 	"marginRight": "90%"
+		// }
+		//
+		// var buttonStyle = {
+		// 	"box-shadow": "0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" "position": "relative",
+		// 	"marginTop": "2%",
+		// 	"marginLeft": "10%",
+		// 	"marginRight": "90%"
+		// }
 
-		return (<div width="400">
-			<canvas width="500" height="200" ref="canvas" style={canvasStyle}>
+		return (<div>
+			<canvas id="drawCanvas" width="500" height="500" ref="canvas">
 				Sorry your browser does not support canvas
 			</canvas>
+			<button id="clearButton" onClick={this.clearCanvas}>Clear</button>
 		</div>)
 	}
 
