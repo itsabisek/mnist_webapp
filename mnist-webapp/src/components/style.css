@@ -10,12 +10,17 @@
 
 #chartCanvas{
   position: absolute;
-  border: 5px;
-  border-style: double solid;
+  /* border: 5px; */
+  /* border-style: double solid; */
   bottom:198pt;
   left:550pt;
-  height : 500px;
-  width : 500px;
+  /* height : 500px;
+  width : 500px; */
+}
+
+#chartContainer{
+  height:520px;
+  width: 800px;
 }
 
 

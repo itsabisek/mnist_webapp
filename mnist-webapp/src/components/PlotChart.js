@@ -4,6 +4,10 @@ var Chart = require('chart.js')
 export class PlotChart extends React.Component {
 
 	componentDidMount() {
+		// let canvas = this.refs.chart
+		// canvas.style.marginBottom = "7.8%"
+		// canvas.parentNode.style.height = "500px"
+		// canvas.parentNode.style.widht = "20px"
 
 		this.plot()
 	}
@@ -53,13 +57,13 @@ export class PlotChart extends React.Component {
 				]
 			},
 			options: {
-				maintainAspectRatio: true
+				maintainAspectRatio: false
 			}
 		})
 	}
 
 	render() {
-		return (<div height="500">
+		return (<div id="chartContainer">
 			<canvas id="chartCanvas" ref="chart">
 				Sorry your browser does not support plotting this chart
 			</canvas>
