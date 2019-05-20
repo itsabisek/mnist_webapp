@@ -4,21 +4,14 @@
   border-color: grey;
   /* position : absolute; */
   margin-top: 10%;
-  margin-left: 10%;
-  margin-right: 70%;
-}
-
-#chartCanvas{
-  position: absolute;
-  /* border: 5px; */
-  /* border-style: double solid; */
-  bottom:198pt;
-  left:550pt;
-  /* height : 500px;
-  width : 500px; */
+  margin-left: 4%;
+  margin-right: 58%;
 }
 
 #chartContainer{
+  position: absolute;
+  margin-left: 37% ;
+  margin-top: -31%;
   height:520px;
   width: 800px;
 }
@@ -27,8 +20,8 @@
 #clearButton{
   /* position: relative; */
   margin-top : 1%;
-  margin-left: 10%;
-  margin-right: 90%;
+  margin-left: 4%;
+  margin-right: 79%;
   background-color: #f4511e;
   border: none;
   color: white;
