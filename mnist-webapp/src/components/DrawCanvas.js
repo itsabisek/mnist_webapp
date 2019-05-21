@@ -1,13 +1,33 @@
 import React from 'react'
+import {predict} from './Main'
+import {PlotChart} from './PlotChart'
+var tf = require('@tensorflow/tfjs')
+
+let model = null
+let uri = window.location.href + 'modelJS/model.json'
 
 export class Canvas extends React.Component {
+
+	async loadModel(){
+		try{
+			model =  await tf.loadLayersModel(uri)
+			console.log(model);
+		}catch(e){
+			console.log(e)
+		}
+	}
 
 	componentDidMount() {
 
 		// const {canvasHeight, canvasWidth} = this.state.canvasDims
 		// this.refs.canvas.height = canvasHeight
 		// this.refs.canvas.width = canvasWidth
+
+
 		this.setupCanvas()
+		this.loadModel()
+
+
 	}
 
 	componentDidUpdate() {
@@ -31,10 +51,16 @@ export class Canvas extends React.Component {
 		let endDrawing = () => {
 			penDown = false
 			ctx.beginPath()
+
+			let imageData = ctx.getImageData(0,0,canvas.width,canvas.height)
+			let predictions = predict(model,imageData)
+
+			PlotChart.updateChart(predictions)
+
 		}
 
 		let draw = e => {
-			if (!penDown) 
+			if (!penDown)
 				return
 
 			ctx.lineWidth = 15
@@ -57,25 +83,10 @@ export class Canvas extends React.Component {
 	clearCanvas = () => {
 		const ctx = this.refs.canvas.getContext('2d')
 		ctx.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height)
+		PlotChart.updateChart([0,0,0,0,0,0,0,0,0,0])
 	}
 
 	render() {
-
-		// var canvasStyle = {
-		// 	"border": "2px solid black",
-		// 	"position": "relative",
-		// 	"marginTop": "10%",
-		// 	"marginLeft": "10%",
-		// 	"marginRight": "90%"
-		// }
-		//
-		// var buttonStyle = {
-		// 	"box-shadow": "0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);" "position": "relative",
-		// 	"marginTop": "2%",
-		// 	"marginLeft": "10%",
-		// 	"marginRight": "90%"
-		// }
-
 		return (<div>
 			<canvas id="drawCanvas" width="500" height="500" ref="canvas">
 				Sorry your browser does not support canvas

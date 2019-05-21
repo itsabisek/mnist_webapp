@@ -1,5 +1,6 @@
 import React from 'react'
 var Chart = require('chart.js')
+let myChart = null
 
 export class PlotChart extends React.Component {
 
@@ -14,7 +15,7 @@ export class PlotChart extends React.Component {
 
 	plot() {
 		const ctx = this.refs.chart.getContext('2d')
-		const myChart = new Chart(ctx, {
+		myChart = new Chart(ctx, {
 			type: 'horizontalBar',
 			data: {
 				labels: [
@@ -31,48 +32,59 @@ export class PlotChart extends React.Component {
 				],
 				datasets: [
 					{
-						label: 'Probability',
-						data: [
-							12,
-							19,
-							3,
-							5,
-							2,
-							3,
-							1,
-							2,
-							3,
-							9
-						],
+						label: 'Predicted Probability',
+						data: [0,0,0,0,0,0,0,0,0,0],
 						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)',
-							'rgba(54, 162, 235, 0.2)'
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey',
+							'grey'
 						],
-						borderColor: [
-							'rgba(255, 99, 132, 1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-						],
+						borderColor: [],
 						borderWidth: 1
 					}
 				]
 			},
 			options: {
-				maintainAspectRatio: false
+				maintainAspectRatio: false,
+				scales: {
+					xAxes: [
+						{
+							display: false,
+							gridLines: {
+								display: false
+							}
+						}
+					],
+
+					yAxes: [
+						{
+							gridLines: {
+								display: false
+							},
+							ticks: {
+								beginAtZero: true,
+								fontSize: 25,
+								fontColor: 'black'
+							}
+						}
+					]
+				}
 			}
 		})
 	}
+
+	static updateChart(newDataset) {
+			myChart.data.datasets[0].data = newDataset
+			myChart.update()
+	}
+
 
 	render() {
 		return (<div id="chartContainer">
