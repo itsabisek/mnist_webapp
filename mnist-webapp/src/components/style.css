@@ -1,0 +1,45 @@
+#drawCanvas{
+  border: 5px;
+  border-style: double solid;
+  border-color: grey;
+  margin-top: 10%;
+  margin-left: 4%;
+  margin-right: 58%;
+}
+
+#chartContainer{
+  position: absolute;
+  margin-left: 37% ;
+  margin-top: -31%;
+  height:520px;
+  width: 800px;
+}
+
+
+#clearButton{
+  margin-top : 1%;
+  margin-left: 4%;
+  margin-right: 79%;
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+}
+
+#clearButton:hover{
+  opacity: 1;
+
+}
+
+#showCanvas{
+  border-style: solid;
+}
