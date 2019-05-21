@@ -1,7 +1,6 @@
 import React from 'react'
-import {predict} from './Main'
 import {PlotChart} from './PlotChart'
-var tf = require('@tensorflow/tfjs')
+var tf = require('@tensorflow/tfjs/dist/index')
 
 let model = null
 let uri = window.location.href + 'modelJS/model.json'
@@ -19,21 +18,11 @@ export class Canvas extends React.Component {
 
 	componentDidMount() {
 
-		// const {canvasHeight, canvasWidth} = this.state.canvasDims
-		// this.refs.canvas.height = canvasHeight
-		// this.refs.canvas.width = canvasWidth
-
-
-		this.setupCanvas()
 		this.loadModel()
-
-
+		this.setupCanvas()
 	}
 
 	componentDidUpdate() {
-		// const {canvasHeight, canvasWidth} = this.state.canvasDims
-		// this.refs.canvas.height = canvasHeight
-		// this.refs.canvas.width = canvasWidth
 
 		this.setupCanvas()
 	}
@@ -51,24 +40,22 @@ export class Canvas extends React.Component {
 		let endDrawing = () => {
 			penDown = false
 			ctx.beginPath()
+			ctx.drawImage(canvas,0,0,28,28)
 
-			let imageData = ctx.getImageData(0,0,canvas.width,canvas.height)
-			let predictions = predict(model,imageData)
-
-			PlotChart.updateChart(predictions)
-
+			let data = ctx.getImageData(0,0,28,28)
+			this.predict(model,data)
 		}
 
 		let draw = e => {
 			if (!penDown)
 				return
 
+			ctx.strokeStyle = '#111111'
 			ctx.lineWidth = 15
 			ctx.lineCap = 'round'
 			ctx.shadowBlur = 2;
 			ctx.shadowOffsetX = 5;
 			ctx.shadowOffsetY = 3;
-			ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 			ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 			ctx.stroke()
 
@@ -78,6 +65,22 @@ export class Canvas extends React.Component {
 		canvas.addEventListener('mouseup', endDrawing)
 		canvas.addEventListener('mousemove', draw)
 
+	}
+
+	async predict (model,imageData){
+
+		let predictions = null
+
+		const pred = await tf.tidy(() => {
+			let data = tf.browser.fromPixels(imageData,1)
+			data = tf.expandDims(data)
+			data = tf.cast(data,"float32")
+
+			predictions = model.predict(data)
+			return Array.from(predictions.dataSync())
+
+		})
+		PlotChart.updateChart(pred)
 	}
 
 	clearCanvas = () => {

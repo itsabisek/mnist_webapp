@@ -5,10 +5,6 @@ let myChart = null
 export class PlotChart extends React.Component {
 
 	componentDidMount() {
-		// let canvas = this.refs.chart
-		// canvas.style.marginBottom = "7.8%"
-		// canvas.parentNode.style.height = "500px"
-		// canvas.parentNode.style.widht = "20px"
 
 		this.plot()
 	}

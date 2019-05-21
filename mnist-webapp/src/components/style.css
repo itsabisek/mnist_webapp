@@ -2,7 +2,6 @@
   border: 5px;
   border-style: double solid;
   border-color: grey;
-  /* position : absolute; */
   margin-top: 10%;
   margin-left: 4%;
   margin-right: 58%;
@@ -18,7 +17,6 @@
 
 
 #clearButton{
-  /* position: relative; */
   margin-top : 1%;
   margin-left: 4%;
   margin-right: 79%;
@@ -40,4 +38,8 @@
 #clearButton:hover{
   opacity: 1;
 
+}
+
+#showCanvas{
+  border-style: solid;
 }
