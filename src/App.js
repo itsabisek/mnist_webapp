@@ -7,7 +7,7 @@ import './components/style.css'
 class App extends React.Component {
 	render() {
 		return (<div className="App">
-
+			<h1>Enter any digit from 0-9 below.</h1>
 			<Canvas/>
 			<PlotChart/>
 		</div>);
